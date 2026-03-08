@@ -73,7 +73,8 @@ We see in simulations with just 1 NCA, information collapses to 0 as the NCA pus
 
 https://github.com/user-attachments/assets/8fe9591b-a6be-4534-857f-9eb96c430445
 
-
+Here we show the difference in behavior as we scale from 16 x 16 Grids to 196 x 196. Qualitatively, we see that cycles only emerge at the largest grid size and the grid size also supports the survival of more NCAs.
+<img width="747" height="459" alt="image" src="https://github.com/user-attachments/assets/68cfb202-2b3a-4c87-a1d5-829af0285e20" />
 
 
 ### Supervised Target & Open-Endedness
