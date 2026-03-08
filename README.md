@@ -19,7 +19,7 @@ Namesake Neural Cellular Automata
 
 
 ## Abstract
-While neural cellular automata (NCA) have proven effective for modeling morphogenesis and self-organizing processes, they are typically governed by a fixed, non-adaptive update rule shared across all cells. Each cell applies the same learned local transition function throughout its lifetime, resulting in static developmental dynamics once training is complete. We introduce Namesake Neural Cellular Automata (PD-NCA), a differentiable Artificial Life substrate that removes this constraint by allowing multiple, independent NCA agents to coexist, compete, and adapt within a shared environment. Unlike conventional NCA, each agent in PD-NCA continually updates its parameters via gradient descent during the simulation itself, enabling within-lifetime learning and open-ended behavioral change. This continual, multi-agent learning process transforms morphogenesis from a fixed developmental program into a dynamic ecosystem of interacting, adaptive entities. Through these interactions, PD-NCA exhibits emergent behaviors such as cyclic dynamics, cooperation, and persistent complexity growth, providing a promising new framework for studying open-endedness in differentiable systems.
+While neural cellular automata (NCA) have proven effective for modeling morphogenesis and self-organizing processes, they are typically governed by a fixed, non-adaptive update rule shared across all cells. Each cell applies the same learned local transition function throughout its lifetime, resulting in static developmental dynamics once training is complete. We introduce Namesake Neural Cellular Automata (N-NCA), a differentiable Artificial Life substrate that removes this constraint by allowing multiple, independent NCA agents to coexist, compete, and adapt within a shared environment. Unlike conventional NCA, each agent in N-NCA continually updates its parameters via gradient descent during the simulation itself, enabling within-lifetime learning and open-ended behavioral change. This continual, multi-agent learning process transforms morphogenesis from a fixed developmental program into a dynamic ecosystem of interacting, adaptive entities. Through these interactions, N-NCA exhibits emergent behaviors such as cyclic dynamics, cooperation, and persistent complexity growth, providing a promising new framework for studying open-endedness in differentiable systems.
 
 <div style="display: flex; justify-content: space-between;">
   <img width="949" height="407" alt="Screenshot 2026-03-08 222634" src="https://github.com/user-attachments/assets/82dde020-4a98-4af7-a0e5-bbf26cbfd346" />
@@ -52,19 +52,19 @@ uv sync
 For additional configurations, you can load a JSON config file. Any parameters not specified in the config file will be set their default value in `src/config.py`
 
 ## Method
-Petri Dish NCA continuously compete for space in a constrained 2D grid. Each different color represents an individual model. The simulation proceeds through 4 distinct phases: (1) processing, (2) competition, (3) normalization, and (4) a state update.
+Namesake NCA continuously compete for space in a constrained 2D grid. Each different color represents an individual model. The simulation proceeds through 4 distinct phases: (1) processing, (2) competition, (3) normalization, and (4) a state update.
 <img width="6000" height="1530" alt="image" src="https://github.com/user-attachments/assets/f6efafd8-525a-4946-9d13-250710ba64ad" />
 
 ## Experiments
-We ran many experiments to explore PD-NCA, namely:
+We ran many experiments to explore N-NCA, namely:
 
-1. Analyzing the complex dynamics of PD-NCA over time by measuring information.
+1. Analyzing the complex dynamics of N-NCA over time by measuring information.
 2. Inspecting the impact of learning to understand its role in ALife simulation.
 3. Hyperparameter searches for noteworthy simulations, using video compression and the open-endedness score from the ASAL [9] framework.
 4. Exploration of connection to hypercycles.
 
 ## Dynamics
-One of our first findings when exploring PD-NCA was that scaling the grid size and number of NCA consistently led to richer collective behavior. This suggests that an avenue of exploration must involve engineering PD-NCA to run on much larger grids, support more NCA, and potentially run on many GPUs simultaneously. In order to measure the notion of ‘richness’ or ‘interesting behavior’, we cannot only rely on subjective assessment, as this precludes scaling hyperparameter searches. To this end, we propose to measure the amount of information stored on the grid as a proxy for complexity. Since NCA model size is fixed, the simulation behavior complexity is fully explained by input (the grid) complexity and the learned parameters of the individual NCA.
+One of our first findings when exploring N-NCA was that scaling the grid size and number of NCA consistently led to richer collective behavior. This suggests that an avenue of exploration must involve engineering N-NCA to run on much larger grids, support more NCA, and potentially run on many GPUs simultaneously. In order to measure the notion of ‘richness’ or ‘interesting behavior’, we cannot only rely on subjective assessment, as this precludes scaling hyperparameter searches. To this end, we propose to measure the amount of information stored on the grid as a proxy for complexity. Since NCA model size is fixed, the simulation behavior complexity is fully explained by input (the grid) complexity and the learned parameters of the individual NCA.
 
 <img width="747" height="459" alt="image" src="https://github.com/user-attachments/assets/832d6d50-0828-42c0-80e8-bd5172d76c66" />
 <img width="747" height="459" alt="image" src="https://github.com/user-attachments/assets/97cef719-9123-4ff7-bbfd-4554278d58a8" />
@@ -78,7 +78,7 @@ Here we show the difference in behavior as we scale from 16 x 16 Grids to 196 x 
 
 
 ## The impact of learning
-The videos below explore whether learning has a notable impact on the PD-NCA simulation. Without learning, the system eventually settles into a steady state with only minor fluctuation. With learning, however, we often observe interesting cyclic behavior and progression through various ‘states of interaction’. These demonstrations suggest that the number of NCA, grid size, and learning are necessary for the complex simulations that PD-NCA can yield.
+The videos below explore whether learning has a notable impact on the N-NCA simulation. Without learning, the system eventually settles into a steady state with only minor fluctuation. With learning, however, we often observe interesting cyclic behavior and progression through various ‘states of interaction’. These demonstrations suggest that the number of NCA, grid size, and learning are necessary for the complex simulations that N-NCA can yield.
 
 <img width="1434" height="720" alt="image" src="https://github.com/user-attachments/assets/2f57bfab-835a-4266-a4b7-c1ddce57c0b1" />
 
