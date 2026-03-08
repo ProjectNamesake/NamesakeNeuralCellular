@@ -6,7 +6,7 @@
 
 
 <h1 align="center">
-Petri Dish Neural Cellular Automata' to ‘Namesake Neural Cellular Automata
+Namesake Neural Cellular Automata
 </h1>
 <p align="center">
   <a href="https://neurolifeblog.com">Paper</a>
