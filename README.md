@@ -3,6 +3,7 @@
   <a href="https://neurolifeblog.com">
     <img width="600" alt="Discovered ALife Simulations" src="https://pub.sakana.ai/asal_blog_assets/cover_video_square-min.png"></a><br>
 </h1>
+<img width="1267" height="365" alt="Screenshot 2026-03-08 222634" src="https://github.com/user-attachments/assets/376f26d1-4395-47a3-ad5a-f0429dd22906" />
 
 
 <h1 align="center">
