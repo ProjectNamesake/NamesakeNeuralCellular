@@ -74,6 +74,10 @@ We see in simulations with just 1 NCA, information collapses to 0 as the NCA pus
 <img width="3600" height="720" alt="image" src="https://github.com/user-attachments/assets/83cbe8f8-857b-44bd-bde4-18eafd7a5e9d" />
 
 
+https://github.com/user-attachments/assets/8fe9591b-a6be-4534-857f-9eb96c430445
+
+
+
 
 ### Supervised Target & Open-Endedness
 Use [main_opt.py](main_opt.py) with Sep-CMA-ES (from evosax):
