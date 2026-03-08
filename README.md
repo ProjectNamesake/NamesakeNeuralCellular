@@ -24,6 +24,8 @@ While neural cellular automata (NCA) have proven effective for modeling morphoge
 <div style="display: flex; justify-content: space-between;">
   <img src="https://pub.sakana.ai/asal_blog_assets/teaser.png" alt="Image 1" style="width: 48%;">
   <img src="https://pub.sakana.ai/asal_blog_assets/methods_figure.png" alt="Image 2" style="width: 48%;">
+  <img width="949" height="407" alt="Screenshot 2026-03-08 222634" src="https://github.com/user-attachments/assets/82dde020-4a98-4af7-a0e5-bbf26cbfd346" />
+
 </div>
 
 ## Repo Description
