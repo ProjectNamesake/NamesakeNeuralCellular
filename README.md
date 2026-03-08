@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  <a href="https://neurolifeblog.com">
+  <a href="https://dainty-cassata-53ede8.netlify.app/">
     <img width="1267" height="365" alt="Screenshot 2026-03-08 222634" src="https://github.com/user-attachments/assets/376f26d1-4395-47a3-ad5a-f0429dd22906" /></a><br>
 </h1>
 
@@ -9,7 +9,7 @@
 Namesake Neural Cellular Automata
 </h1>
 <p align="center">
-  <a href="https://neurolifeblog.com">Paper</a>
+  <a href="https://dainty-cassata-53ede8.netlify.app/">Paper</a>
 </p>
 
 </h1>
