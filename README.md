@@ -36,7 +36,7 @@ What happens if we are able to put multiple different NCAs in a single substrate
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh         # Or install uv another way
 
-git clone https://github.com/SakanaAI/petri-dish-nca
+git clone https://github.com/ProjectNamesake/NamesakeNeuralCellular
 cd petri-dish-nca
 uv sync
 ```
