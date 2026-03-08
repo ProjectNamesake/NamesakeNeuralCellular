@@ -77,136 +77,15 @@ Here we show the difference in behavior as we scale from 16 x 16 Grids to 196 x 
 <img width="747" height="459" alt="image" src="https://github.com/user-attachments/assets/68cfb202-2b3a-4c87-a1d5-829af0285e20" />
 
 
-### Supervised Target & Open-Endedness
-Use [main_opt.py](main_opt.py) with Sep-CMA-ES (from evosax):
-```sh
-# Search for a Lenia simulation matching a single prompt
-python main_opt.py --seed=0 --save_dir="./data/supervised_0" --substrate='lenia' \
-  --time_sampling=1 --prompts="a caterpillar" --coef_prompt=1. --coef_softmax=0. \
-  --coef_oe=0. --bs=1 --pop_size=16 --n_iters=1000 --sigma=0.1
+## The impact of learning
+The videos below explore whether learning has a notable impact on the PD-NCA simulation. Without learning, the system eventually settles into a steady state with only minor fluctuation. With learning, however, we often observe interesting cyclic behavior and progression through various ‘states of interaction’. These demonstrations suggest that the number of NCA, grid size, and learning are necessary for the complex simulations that PD-NCA can yield.
 
-# Search for temporal targets (sequence of events)
-python main_opt.py --seed=4 --save_dir="./data/supervised_temporal_4" --substrate='lenia' \
-  --time_sampling=2 --prompts="a small biological cell;a large biological cell" \
-  --coef_prompt=1. --coef_softmax=0.1 --coef_oe=0. --bs=1 --pop_size=16 --n_iters=1000 --sigma=0.1
+<img width="1434" height="720" alt="image" src="https://github.com/user-attachments/assets/2f57bfab-835a-4266-a4b7-c1ddce57c0b1" />
 
-# Search for open-ended simulations
-python main_opt.py --seed=3 --save_dir="./data/open_endedness_3" --substrate='lenia' \
-  --time_sampling=32 --prompts="" --coef_prompt=0. --coef_softmax=0. --coef_oe=1. \
-  --bs=1 --pop_size=16 --n_iters=1000 --sigma=0.1
 
-# Combine supervised target + open-endedness
-python main_opt.py --seed=0 --save_dir="./data/st_oe_0" --substrate='lenia' \
-  --time_sampling=32 --prompts="a diverse ecosystem of cells" --coef_prompt=1. \
-  --coef_softmax=0. --coef_oe=1. --bs=1 --pop_size=16 --n_iters=1000 --sigma=0.1
-```
+## Hyperparameter search
+We searched the space of model configurations up to 15 layers, 128 channels (≈500K parameters). We ran up to a maximum of 15 NCA on grids up to 256 × 256 in size. We also included hyperparameters that control the ratio of steps with and without backpropagation as we found this to impact the simulation outcome. To guide this search we leveraged both a classical video compression score and neural score (i.e., the open-endedness score used in ASAL [9]).
 
-### Illumination
-Use [main_illuminate.py](main_illuminate.py) with a custom genetic algorithm:
-```sh
-python main_illuminate.py --seed=0 --save_dir="./data/illuminate_0" --substrate='lenia' \
-  --n_child=32 --pop_size=256 --n_iters=1000 --sigma=0.1
-```
+<img width="960" height="640" alt="image" src="https://github.com/user-attachments/assets/941c9646-95d1-4d1e-8ed4-3b80b7c61419" />
 
-### Game of Life Sweep
-Use [main_sweep_gol.py](main_sweep_gol.py) with brute force search (discrete search space):
-```sh
-python main_sweep_gol.py
-```
 
-[neurolife.ipynb](neurolife.ipynb) goes through everything you need to know in detail, including how to visualize results.
-
-## Tips for Getting Good Results
-
-Some tips on getting the results you want from a given substrate:
-- **Run for many seeds.** Meta optimizing chaotic systems is quite tough and noisy. More seeds can significantly increase the chances of getting what you want.
-- **Play around with different hyperparameters.**
-    - When doing the supervised temporal targets with multiple prompts, `coef_softmax` needs to be tuned.
-    - Pay attention to the `time_sampling` variable and tune it. For open-endedness, try setting `time_sampling` to a large value (32 works well).
-- **Run for more search iterations.** This can get you quite far sometimes.
-- **Pick good expressive substrates.** Some substrates aren't capable of expressing certain lifeforms. Check out the discussion section of the paper.
-- **Use better search algorithms!** We used Sep-CMA-ES, SGD, GAs, and brute force search in the paper, but other search algorithms may be better for certain substrates you choose.
-- **CLIP seems to be a good choice of foundation model.** I don't think this is the bottleneck. But newer foundation models may be better than CLIP.
-
-Particle Life++ has lots of potential and is an extremely untapped substrate so far, so experimenting with that would be very cool, although optimization is hard in that, due to how chaotic it is.
-
-If you get bored, it would be amazing to apply NeuroLife to newer substrates like [ALIEN](https://www.youtube.com/watch?v=qwbMGPkoJmg) and [JaxLife](https://github.com/luchris429/jaxlife)!
-
-## Running Locally
-### Installation
-
-To run this project locally, you can start by cloning this repo.
-```sh
-git clone https://github.com/neurolife-org/NeuroLife.git
-```
-Then, set up the python environment with conda:
-```sh
-conda create --name neurolife python=3.10.13
-conda activate neurolife
-```
-
-Then, install the necessary python libraries:
-```sh
-python -m pip install -r requirements.txt
-```
-However, if you want GPU acceleration (trust me, you do), please [manually install jax](https://github.com/jax-ml/jax?tab=readme-ov-file#installation) according to your system's CUDA version.
-
-### Loading Our Dataset of Simulations
-
-We provide pre-computed datasets from our large scale searches:
-
-- The Lenia and Boids dataset contains **8192 simulations** found in a large illumination search.
-- The GoL dataset contains the **262,144 simulations** ranked in order of most open-ended to least open-ended.
-
-You can view our dataset of simulations at:
-- [Lenia Dataset](https://pub.sakana.ai/asal/data/illumination_poster_lenia.png)
-- [Boids Dataset](https://pub.sakana.ai/asal/data/illumination_poster_boids.png)
-
-You can download the datasets from:
-```sh
-wget -P ./data https://pub.sakana.ai/asal/data/illumination_lenia.npz
-wget -P ./data https://pub.sakana.ai/asal/data/illumination_boids.npz
-wget -P ./data https://pub.sakana.ai/asal/data/illumination_plife.npz
-wget -P ./data https://pub.sakana.ai/asal/data/sweep_gol.npz
-```
-
-Here's how to load and visualize a specific simulation from the dataset:
-```python
-import numpy as np
-from functools import partial
-import jax
-import substrates
-from rollout import rollout_simulation
-
-params_all = np.load("./data/illumination_lenia.npz", allow_pickle=True)['params']
-print(params_all.shape) # shape: (number of simulations, parameter dimension)
-params = params_all[6198] # visualize simulation #6198
-
-substrate = substrates.create_substrate('lenia')
-substrate = substrates.FlattenSubstrateParameters(substrate)
-
-rollout_fn = partial(rollout_simulation, s0=None, substrate=substrate, fm=None,
-                     rollout_steps=substrate.rollout_steps, time_sampling=8,
-                     img_size=224, return_state=False)
-rollout_fn = jax.jit(rollout_fn)
-
-rng = jax.random.PRNGKey(0)
-rollout_data = rollout_fn(rng, params)
-# rollout_data['rgb'] has shape (8, 224, 224, 3)
-```
-
-Directions on how to visualize and load these simulations in more detail are shown in [neurolife.ipynb](neurolife.ipynb).
-
-## Reproducing Results from the Paper
-Everything you need is already in this repo.
-
-## Bibtex Citation
-To cite our work, you can use the following:
-```
-@article{chase2024neurolife,
-  title = {Automating the Search for Artificial Life with Foundation Models},
-  author = {Lee Chase},
-  year = {2024},
-  url = {https://neurolifeblog.com}
-}
-```
