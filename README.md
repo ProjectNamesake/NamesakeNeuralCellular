@@ -89,3 +89,8 @@ We searched the space of model configurations up to 15 layers, 128 channels (≈
 <img width="960" height="640" alt="image" src="https://github.com/user-attachments/assets/941c9646-95d1-4d1e-8ed4-3b80b7c61419" />
 
 
+
+## Conclusion
+Summary We take the first step in seeking to understand whether end-to-end differentiable ALife systems can show signs of open-endedness. In our preliminary experiments, we see signs of cooperation, chemical waves, and the emergence of higher-order structure.
+
+If you would like to discuss any issues or give feedback, please visit the GitHub repository of this page for more information.
