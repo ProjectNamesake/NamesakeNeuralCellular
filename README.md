@@ -19,7 +19,7 @@ Namesake Neural Cellular Automata
 
 
 ## Abstract
-While neural cellular automata (NCA) have proven effective for modeling morphogenesis and self-organizing processes, they are typically governed by a fixed, non-adaptive update rule shared across all cells. Each cell applies the same learned local transition function throughout its lifetime, resulting in static developmental dynamics once training is complete. We introduce Petri Dish Neural Cellular Automata (PD-NCA), a differentiable Artificial Life substrate that removes this constraint by allowing multiple, independent NCA agents to coexist, compete, and adapt within a shared environment. Unlike conventional NCA, each agent in PD-NCA continually updates its parameters via gradient descent during the simulation itself, enabling within-lifetime learning and open-ended behavioral change. This continual, multi-agent learning process transforms morphogenesis from a fixed developmental program into a dynamic ecosystem of interacting, adaptive entities. Through these interactions, PD-NCA exhibits emergent behaviors such as cyclic dynamics, cooperation, and persistent complexity growth, providing a promising new framework for studying open-endedness in differentiable systems.
+While neural cellular automata (NCA) have proven effective for modeling morphogenesis and self-organizing processes, they are typically governed by a fixed, non-adaptive update rule shared across all cells. Each cell applies the same learned local transition function throughout its lifetime, resulting in static developmental dynamics once training is complete. We introduce Namesake Neural Cellular Automata (PD-NCA), a differentiable Artificial Life substrate that removes this constraint by allowing multiple, independent NCA agents to coexist, compete, and adapt within a shared environment. Unlike conventional NCA, each agent in PD-NCA continually updates its parameters via gradient descent during the simulation itself, enabling within-lifetime learning and open-ended behavioral change. This continual, multi-agent learning process transforms morphogenesis from a fixed developmental program into a dynamic ecosystem of interacting, adaptive entities. Through these interactions, PD-NCA exhibits emergent behaviors such as cyclic dynamics, cooperation, and persistent complexity growth, providing a promising new framework for studying open-endedness in differentiable systems.
 
 <div style="display: flex; justify-content: space-between;">
   <img width="949" height="407" alt="Screenshot 2026-03-08 222634" src="https://github.com/user-attachments/assets/82dde020-4a98-4af7-a0e5-bbf26cbfd346" />
@@ -27,7 +27,7 @@ While neural cellular automata (NCA) have proven effective for modeling morphoge
 </div>
 
 
-# Petri Dish NCA
+# Namesake NCA
 
 What happens if we are able to put multiple different NCAs in a single substrate that compete for space?
 
