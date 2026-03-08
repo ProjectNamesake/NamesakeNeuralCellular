@@ -51,56 +51,29 @@ uv sync
 
 For additional configurations, you can load a JSON config file. Any parameters not specified in the config file will be set their default value in `src/config.py`
 
-## Repo Description
-This repo contains a minimalistic implementation of NeuroLife to get you started ASAP.
-Everything is implemented in the [Jax framework](https://github.com/jax-ml/jax), making everything end-to-end jittable and very fast.
+## Method
+Petri Dish NCA continuously compete for space in a constrained 2D grid. Each different color represents an individual model. The simulation proceeds through 4 distinct phases: (1) processing, (2) competition, (3) normalization, and (4) a state update.
+<img width="6000" height="1530" alt="image" src="https://github.com/user-attachments/assets/f6efafd8-525a-4946-9d13-250710ba64ad" />
+
+## Experiments
+We ran many experiments to explore PD-NCA, namely:
+
+1. Analyzing the complex dynamics of PD-NCA over time by measuring information.
+2. Inspecting the impact of learning to understand its role in ALife simulation.
+3. Hyperparameter searches for noteworthy simulations, using video compression and the open-endedness score from the ASAL [9] framework.
+4. Exploration of connection to hypercycles.
+
+## Dynamics
+One of our first findings when exploring PD-NCA was that scaling the grid size and number of NCA consistently led to richer collective behavior. This suggests that an avenue of exploration must involve engineering PD-NCA to run on much larger grids, support more NCA, and potentially run on many GPUs simultaneously. In order to measure the notion of ‘richness’ or ‘interesting behavior’, we cannot only rely on subjective assessment, as this precludes scaling hyperparameter searches. To this end, we propose to measure the amount of information stored on the grid as a proxy for complexity. Since NCA model size is fixed, the simulation behavior complexity is fully explained by input (the grid) complexity and the learned parameters of the individual NCA.
+
+<img width="747" height="459" alt="image" src="https://github.com/user-attachments/assets/832d6d50-0828-42c0-80e8-bd5172d76c66" />
+<img width="747" height="459" alt="image" src="https://github.com/user-attachments/assets/97cef719-9123-4ff7-bbfd-4554278d58a8" />
+
+We see in simulations with just 1 NCA, information collapses to 0 as the NCA pushes each channel towards uniformity. With multiple NCA competing on the same grid, information increases over time. While bits/channel would be maximized with fully random channels, there is an optimization force against such an outcome: an NCA yielding pseudo-random updates can be trivially overwritten by an NCA with a strong attack vecto
+
+<img width="3600" height="720" alt="image" src="https://github.com/user-attachments/assets/83cbe8f8-857b-44bd-bde4-18eafd7a5e9d" />
 
 
-The important code is here:
-- [foundation_models/__init__.py](foundation_models/__init__.py) has the code to create a foundation model.
-- [substrates/__init__.py](substrates/__init__.py) has the code to create a substrate.
-- [rollout.py](rollout.py) has the code to rollout a simulation efficiently.
-- [asal_metrics.py](asal_metrics.py) has the code to compute the metrics from NeuroLife.
-
-Here is some minimal code to sample some random simulation parameters and run the simulation and evaluate how open-ended it is:
-```python
-import jax
-from functools import partial
-import substrates
-import foundation_models
-from rollout import rollout_simulation
-import asal_metrics
-
-fm = foundation_models.create_foundation_model('clip')
-substrate = substrates.create_substrate('lenia')
-rollout_fn = partial(rollout_simulation, s0=None, substrate=substrate, fm=fm, rollout_steps=substrate.rollout_steps, time_sampling=8, img_size=224, return_state=False) # create the rollout function
-rollout_fn = jax.jit(rollout_fn) # jit for speed
-# now you can use rollout_fn as you need...
-rng = jax.random.PRNGKey(0)
-params = substrate.default_params(rng) # sample random parameters
-rollout_data = rollout_fn(rng, params)
-rgb = rollout_data['rgb'] # shape: (8, 224, 224, 3)
-z = rollout_data['z'] # shape: (8, 512)
-oe_score = asal_metrics.calc_open_endedness_score(z) # shape: ()
-```
-
-## ALife Substrates
-We have already implemented the following ALife substrates:
-- 'lenia': [Lenia](https://en.wikipedia.org/wiki/Lenia)
-- 'boids': [Boids](https://en.wikipedia.org/wiki/Boids)
-- 'plife': [Particle Life](https://www.youtube.com/watch?v=scvuli-zcRc)
-- 'plife_plus': Particle Life++
-  - (Particle Life with changing color dynamics)
-- 'plenia': [Particle Lenia](https://google-research.github.io/self-organising-systems/particle-lenia/)
-- 'dnca': Discrete Neural Cellular Automata
-- 'nca_d1': [Continuous Neural Cellular Automata](https://distill.pub/2020/growing-ca/)
-- 'gol': [Game of Life/Life-Like Cellular Automata](https://en.wikipedia.org/wiki/Life-like_cellular_automaton)
-
-You can find the code for these substrates at [substrates/](substrates/)
-
-## Running NeuroLife
-
-The main files to run the entire NeuroLife pipeline are the following:
 
 ### Supervised Target & Open-Endedness
 Use [main_opt.py](main_opt.py) with Sep-CMA-ES (from evosax):
