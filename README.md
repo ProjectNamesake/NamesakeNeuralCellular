@@ -6,16 +6,16 @@
 
 
 <h1 align="center">
-Automating the Search for Artificial Life with Foundation Models
+Petri Dish Neural Cellular Automata' to ‘Namesake Neural Cellular Automata
 </h1>
 <p align="center">
   <a href="https://neurolifeblog.com">Paper</a>
 </p>
 
-[Lee Chase](https://x.com/leechase99)
+[allankjensen](https://x.com/allankjensen)
 
 ## Abstract
-With the recent Nobel Prize awarded for radical advances in protein discovery, foundation models (FMs) for exploring large combinatorial spaces promise to revolutionize many scientific fields. Artificial Life (ALife) has not yet integrated FMs, thus presenting a major opportunity for the field to alleviate the historical burden of relying chiefly on manual design and trial-and-error to discover the configurations of lifelike simulations. This paper presents, for the first time, a successful realization of this opportunity using vision-language FMs. The proposed approach, called *NeuroLife*, (1) finds simulations that produce target phenomena, (2) discovers simulations that generate temporally open-ended novelty, and (3) illuminates an entire space of interestingly diverse simulations. Because of the generality of FMs, NeuroLife works effectively across a diverse range of ALife substrates including Boids, Particle Life, Game of Life, Lenia, and Neural Cellular Automata. A major result highlighting the potential of this technique is the discovery of previously unseen Lenia and Boids lifeforms, as well as cellular automata that are open-ended like Conway's Game of Life. Additionally, the use of FMs allows for the quantification of previously qualitative phenomena in a human-aligned way. This new paradigm promises to accelerate ALife research beyond what is possible through human ingenuity alone.
+While neural cellular automata (NCA) have proven effective for modeling morphogenesis and self-organizing processes, they are typically governed by a fixed, non-adaptive update rule shared across all cells. Each cell applies the same learned local transition function throughout its lifetime, resulting in static developmental dynamics once training is complete. We introduce Petri Dish Neural Cellular Automata (PD-NCA), a differentiable Artificial Life substrate that removes this constraint by allowing multiple, independent NCA agents to coexist, compete, and adapt within a shared environment. Unlike conventional NCA, each agent in PD-NCA continually updates its parameters via gradient descent during the simulation itself, enabling within-lifetime learning and open-ended behavioral change. This continual, multi-agent learning process transforms morphogenesis from a fixed developmental program into a dynamic ecosystem of interacting, adaptive entities. Through these interactions, PD-NCA exhibits emergent behaviors such as cyclic dynamics, cooperation, and persistent complexity growth, providing a promising new framework for studying open-endedness in differentiable systems.
 
 <div style="display: flex; justify-content: space-between;">
   <img src="https://pub.sakana.ai/asal_blog_assets/teaser.png" alt="Image 1" style="width: 48%;">
